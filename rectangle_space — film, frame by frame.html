@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)file:///C:/Users/jishn/Downloads/index_3.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>rectangle_space — film, frame by frame</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap');
+
+  :root{
+    --bg: #0E0D10;
+    --panel: #17161A;
+    --panel-2: #1E1C21;
+    --line: #2B282F;
+    --gold: #C9A45C;
+    --red: #C1272D;
+    --text: #F2EFE9;
+    --muted: #8A8790;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--bg); color:var(--text); font-family:var(--font-body);
+    line-height:1.6;
+  }
+  a{ color:inherit; text-decoration:none; }
+  img{ max-width:100%; display:block; }
+  .wrap{ max-width:1120px; margin:0 auto; padding:0 28px; }
+  .eyebrow{
+    font-family:var(--font-mono); font-size:11px; letter-spacing:2px;
+    color:var(--gold); text-transform:uppercase; margin-bottom:14px; display:block;
+  }
+  h1,h2,h3{ font-family:var(--font-display); font-weight:400; letter-spacing:0.5px; }
+  ::selection{ background:var(--gold); color:#0E0D10; }
+  @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(14,13,16,0.88); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 28px; max-width:1120px; margin:0 auto;
+  }
+  .logo{ font-family:var(--font-display); font-size:22px; letter-spacing:1px; }
+  .logo span{ color:var(--gold); }
+  .navlinks{ display:flex; gap:28px; font-family:var(--font-mono); font-size:12px; letter-spacing:1px; text-transform:uppercase; }
+  .navlinks a{ color:var(--muted); transition:color .2s; }
+  .navlinks a:hover{ color:var(--gold); }
+  .navtoggle{ display:none; background:none; border:none; color:var(--text); font-size:22px; cursor:pointer; }
+  @media (max-width:760px){
+    .navlinks{ display:none; }
+    .navtoggle{ display:block; }
+    .navlinks.open{
+      display:flex; flex-direction:column; position:absolute; top:60px; left:0; right:0;
+      background:var(--panel); padding:20px 28px; gap:16px; border-bottom:1px solid var(--line);
+    }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative; padding:120px 0 60px; overflow:hidden;
+    background:
+      radial-gradient(ellipse at 30% -10%, rgba(193,39,45,0.18), transparent 55%),
+      radial-gradient(ellipse at 80% 10%, rgba(201,164,92,0.10), transparent 50%);
+  }
+  .hero::before{
+    content:''; position:absolute; inset:0; pointer-events:none; opacity:0.05;
+    background-image: repeating-linear-gradient(0deg, #fff 0 1px, transparent 1px 3px);
+    mix-blend-mode:overlay;
+  }
+  .hero h1{
+    font-size: clamp(52px, 9vw, 108px); line-height:0.95; max-width:900px;
+  }
+  .hero p.lead{
+    font-family:var(--font-body); color:var(--muted); font-size:17px; max-width:520px; margin-top:22px;
+  }
+  .hero-actions{ display:flex; gap:14px; margin-top:34px; flex-wrap:wrap; }
+  .btn{
+    font-family:var(--font-mono); font-size:12px; letter-spacing:1px; text-transform:uppercase;
+    padding:13px 24px; border:1px solid var(--line); cursor:pointer; background:var(--panel);
+    transition: all .2s;
+  }
+  .btn.primary{ background:var(--red); border-color:var(--red); color:#fff; }
+  .btn.primary:hover{ background:#a81f24; }
+  .btn:hover{ border-color:var(--gold); color:var(--gold); }
+  .btn.primary:hover{ color:#fff; }
+
+  /* Marquee ticker — signature element */
+  .marquee{
+    margin-top:70px; border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    padding:14px 0; overflow:hidden; white-space:nowrap; background:var(--panel);
+  }
+  .marquee-track{
+    display:inline-block; padding-left:100%;
+    animation: scroll-left 32s linear infinite;
+    font-family:var(--font-mono); font-size:13px; letter-spacing:2px; color:var(--gold);
+  }
+  .marquee-track span{ margin-right:60px; }
+  .marquee-track span::before{ content:'✦'; margin-right:14px; color:var(--muted); }
+  @keyframes scroll-left{ from{ transform:translateX(0); } to{ transform:translateX(-100%); } }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{ padding:100px 0; }
+  .section-head{ display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:48px; flex-wrap:wrap; gap:20px; }
+  .section-head h2{ font-size:44px; }
+  .section-head p{ color:var(--muted); max-width:380px; font-size:14px; }
+
+  /* ---------- WORK GRID ---------- */
+  .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  @media (max-width:900px){ .grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:600px){ .grid{ grid-template-columns:1fr; } }
+  .card{
+    position:relative; aspect-ratio:4/5; border:1px solid var(--line); overflow:hidden;
+    display:flex; flex-direction:column; justify-content:flex-end; padding:20px;
+    cursor:default; transition:transform .25s ease, border-color .25s ease;
+  }
+  .card:hover{ transform:translateY(-4px); border-color:var(--gold); }
+  .card::before{ content:''; position:absolute; inset:0; z-index:0; }
+  .card .card-content{ position:relative; z-index:1; }
+  .card .tag{ font-family:var(--font-mono); font-size:10px; color:rgba(242,239,233,0.75); letter-spacing:1px; margin-bottom:8px; display:block; }
+  .card h3{ font-size:30px; line-height:1; color:#fff; }
+  .card p{ font-size:12px; color:rgba(242,239,233,0.8); margin-top:6px; }
+  .card::after{
+    content:''; position:absolute; inset:0; z-index:0;
+    background:linear-gradient(180deg, rgba(0,0,0,0) 30%, rgba(0,0,0,0.85) 100%);
+  }
+
+  /* ---------- BLOG ---------- */
+  .posts{ display:flex; flex-direction:column; border-top:1px solid var(--line); }
+  .post-row{
+    display:grid; grid-template-columns:110px 1fr auto; gap:24px; align-items:baseline;
+    padding:26px 0; border-bottom:1px solid var(--line); cursor:pointer;
+  }
+  .post-row:hover h3{ color:var(--gold); }
+  .post-row .date{ font-family:var(--font-mono); font-size:12px; color:var(--muted); }
+  .post-row h3{ font-size:24px; transition:color .2s; }
+  .post-row .excerpt{ display:none; grid-column:2/3; color:var(--muted); font-size:14px; margin-top:8px; }
+  .post-row .arrow{ font-family:var(--font-mono); color:var(--muted); font-size:13px; }
+  .post-row.open .excerpt{ display:block; }
+  @media (max-width:640px){ .post-row{ grid-template-columns:1fr; gap:6px; } }
+
+  /* ---------- ABOUT ---------- */
+  .about{ display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+  @media (max-width:800px){ .about{ grid-template-columns:1fr; } }
+  .about-frame{
+    aspect-ratio:4/5; border:1px solid var(--line);
+    background: linear-gradient(160deg, #2A2A2E, #0E0D10);
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-mono); color:var(--muted); font-size:12px; letter-spacing:1px;
+  }
+  .about-body p{ color:var(--muted); margin-bottom:16px; font-size:15px; }
+  .stat-row{ display:flex; gap:36px; margin-top:28px; }
+  .stat{ font-family:var(--font-display); font-size:34px; color:var(--gold); }
+  .stat span{ display:block; font-family:var(--font-mono); font-size:10px; color:var(--muted); letter-spacing:1px; margin-top:2px; }
+
+  /* ---------- CONTACT ---------- */
+  .contact-box{
+    border:1px solid var(--line); padding:48px; display:grid; grid-template-columns:1fr 1fr; gap:48px;
+    background:var(--panel);
+  }
+  @media (max-width:760px){ .contact-box{ grid-template-columns:1fr; padding:32px; } }
+  .field{ margin-bottom:16px; }
+  .field label{ display:block; font-family:var(--font-mono); font-size:11px; color:var(--muted); margin-bottom:6px; text-transform:uppercase; letter-spacing:1px; }
+  .field input, .field textarea{
+    width:100%; background:var(--panel-2); border:1px solid var(--line); color:var(--text);
+    padding:11px 12px; font-family:var(--font-body); font-size:14px;
+  }
+  .field textarea{ min-height:100px; resize:vertical; }
+  .contact-meta p{ color:var(--muted); font-size:14px; margin-bottom:10px; }
+  .contact-meta .gold{ color:var(--gold); }
+
+  /* ---------- FOOTER ---------- */
+  footer{ border-top:1px solid var(--line); padding:40px 0; }
+  .foot-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; }
+  .foot-row .logo{ font-size:16px; }
+  .foot-links{ display:flex; gap:20px; font-family:var(--font-mono); font-size:11px; color:var(--muted); }
+  .foot-links a:hover{ color:var(--gold); }
+  .perf-strip{ display:flex; gap:6px; margin-top:24px; }
+  .perf-strip div{ width:7px; height:7px; background:#1c1a1e; border:1px solid #2b282f; }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">rectangle<span>_space</span></div>
+    <div class="navlinks" id="navlinks">
+      <a href="file:///C:/Users/jishn/Downloads/index_3.html#work">Work</a>
+      <a href="file:///C:/Users/jishn/Downloads/index_3.html#blog">Blog</a>
+      <a href="file:///C:/Users/jishn/Downloads/index_3.html#about">About</a>
+      <a href="file:///C:/Users/jishn/Downloads/index_3.html#contact">Contact</a>
+    </div>
+    <button class="navtoggle" id="navToggle">☰</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Film essays · frame studies · carousels</span>
+    <h1>WATCHING FILM<br>ONE FRAME<br>AT A TIME.</h1>
+    <p class="lead">rectangle_space is a running study of cinema — breakdowns, favorite frames, and the odd obsession with why a shot works. Posted mostly as carousels, written up here in full.</p>
+    <div class="hero-actions">
+      <a href="file:///C:/Users/jishn/Downloads/index_3.html#work" class="btn primary">See the work</a>
+      <a href="file:///C:/Users/jishn/Downloads/index_3.html#contact" class="btn">Get in touch</a>
+    </div>
+  </div>
+  <div class="marquee">
+    <div class="marquee-track" id="marqueeTrack"><span>IN THE MOOD FOR LOVE — COLOR AS LONGING</span><span>THE GODFATHER — BLOCKING &amp; POWER</span><span>PARIS, TEXAS — THE LANDSCAPE AS CHARACTER</span><span>CHUNGKING EXPRESS — MOTION BLUR &amp; LONELINESS</span><span>THERE WILL BE BLOOD — THE OPENING 15 MINUTES</span><span>IN THE MOOD FOR LOVE — COLOR AS LONGING</span><span>THE GODFATHER — BLOCKING &amp; POWER</span><span>PARIS, TEXAS — THE LANDSCAPE AS CHARACTER</span><span>CHUNGKING EXPRESS — MOTION BLUR &amp; LONELINESS</span><span>THERE WILL BE BLOOD — THE OPENING 15 MINUTES</span></div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Selected Work</h2>
+      <p>A running archive of carousel breakdowns — replace these placeholders with your own posters and stills.</p>
+    </div>
+    <div class="grid" id="workGrid">
+    <div class="card" style="background:linear-gradient(160deg,#4a1620,#0E0D10)">
+      <div class="card-content">
+        <span class="tag">CAROUSEL · 8 SLIDES</span>
+        <h3>Color as Longing</h3>
+        <p>In the Mood for Love, 2000</p>
+      </div>
+    </div>
+  
+    <div class="card" style="background:linear-gradient(160deg,#2a2210,#0E0D10)">
+      <div class="card-content">
+        <span class="tag">CAROUSEL · 6 SLIDES</span>
+        <h3>Blocking &amp; Power</h3>
+        <p>The Godfather, 1972</p>
+      </div>
+    </div>
+  
+    <div class="card" style="background:linear-gradient(160deg,#1a2a3a,#0E0D10)">
+      <div class="card-content">
+        <span class="tag">CAROUSEL · 10 SLIDES</span>
+        <h3>Landscape as Character</h3>
+        <p>Paris, Texas, 1984</p>
+      </div>
+    </div>
+  
+    <div class="card" style="background:linear-gradient(160deg,#2a1a3a,#0E0D10)">
+      <div class="card-content">
+        <span class="tag">CAROUSEL · 7 SLIDES</span>
+        <h3>Motion &amp; Loneliness</h3>
+        <p>Chungking Express, 1994</p>
+      </div>
+    </div>
+  
+    <div class="card" style="background:linear-gradient(160deg,#3a1a10,#0E0D10)">
+      <div class="card-content">
+        <span class="tag">CAROUSEL · 9 SLIDES</span>
+        <h3>The First 15 Minutes</h3>
+        <p>There Will Be Blood, 2007</p>
+      </div>
+    </div>
+  
+    <div class="card" style="background:linear-gradient(160deg,#1a1a1a,#0E0D10)">
+      <div class="card-content">
+        <span class="tag">CAROUSEL · 5 SLIDES</span>
+        <h3>Framing Isolation</h3>
+        <p>Taxi Driver, 1976</p>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<section id="blog" style="background:var(--panel);">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Notes</h2>
+      <p>Longer-form writing behind the carousels — click a row to read.</p>
+    </div>
+    <div class="posts" id="postsList">
+    <div class="post-row" data-i="0">
+      <div class="date">Jul 2026</div>
+      <div>
+        <h3>Why the color red disappears in the third act</h3>
+        <div class="excerpt">A look at how a single desaturated palette choice reframes the ending — and why most viewers never consciously notice it.</div>
+      </div>
+      <div class="arrow">Read →</div>
+    </div>
+  
+    <div class="post-row" data-i="1">
+      <div class="date">Jun 2026</div>
+      <div>
+        <h3>Static frames vs. moving frames: what carousels lose</h3>
+        <div class="excerpt">Breaking a film down into six still images means picking six moments to represent a whole scene of motion. Here is how I choose them.</div>
+      </div>
+      <div class="arrow">Read →</div>
+    </div>
+  
+    <div class="post-row" data-i="2">
+      <div class="date">May 2026</div>
+      <div>
+        <h3>The 15-minute rule for cold opens</h3>
+        <div class="excerpt">Some of the best films spend their first act in near silence. Notes on pacing, patience, and audience trust.</div>
+      </div>
+      <div class="arrow">Read →</div>
+    </div>
+  
+    <div class="post-row" data-i="3">
+      <div class="date">Apr 2026</div>
+      <div>
+        <h3>On rewatching a film just for its blocking</h3>
+        <div class="excerpt">Turning off the sound and watching where people stand in a frame tells you almost everything about power in a scene.</div>
+      </div>
+      <div class="arrow">Read →</div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about">
+    <div class="about-frame">[ your photo or a signature frame ]</div>
+    <div class="about-body">
+      <span class="eyebrow">About</span>
+      <h2 style="font-size:38px; margin-bottom:16px;">The person behind the reel.</h2>
+      <p>Write a short bio here — how rectangle_space started, what kind of films you gravitate toward, and what you want people to take from the account. Keep it in your own voice; this is placeholder copy.</p>
+      <p>Add a second paragraph on your process — how you pick frames, research a film, or put a carousel together.</p>
+      <div class="stat-row">
+        <div class="stat">120+<span>Carousels posted</span></div>
+        <div class="stat">40+<span>Films covered</span></div>
+        <div class="stat">3<span>Years running</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="background:var(--panel);">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Let's talk</h2>
+      <p>Collabs, licensing questions, or just film talk.</p>
+    </div>
+    <div class="contact-box">
+      <form id="contactForm" action="mailto:you@example.com" method="post" enctype="text/plain">
+        <div class="field"><label>Name</label><input type="text" required=""></div>
+        <div class="field"><label>Email</label><input type="email" required=""></div>
+        <div class="field"><label>Message</label><textarea required=""></textarea></div>
+        <button type="submit" class="btn primary">Send message</button>
+      </form>
+      <div class="contact-meta">
+        <p>Prefer socials? <span class="gold">@rectangle_space</span> on Instagram is the fastest way to reach me.</p>
+        <p>For press or collab inquiries, replace the form's action email above with your real address.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+      <div class="logo">rectangle<span>_space</span></div>
+      <div class="foot-links">
+        <a href="file:///C:/Users/jishn/Downloads/index_3.html#work">Work</a>
+        <a href="file:///C:/Users/jishn/Downloads/index_3.html#blog">Blog</a>
+        <a href="file:///C:/Users/jishn/Downloads/index_3.html#about">About</a>
+        <a href="file:///C:/Users/jishn/Downloads/index_3.html#contact">Contact</a>
+      </div>
+      <div class="foot-links">© 2026 rectangle_space</div>
+    </div>
+    <div class="perf-strip" id="perfStrip"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+  </div>
+</footer>
+
+<script>
+  // nav toggle
+  document.getElementById('navToggle').addEventListener('click', ()=>{
+    document.getElementById('navlinks').classList.toggle('open');
+  });
+
+  // marquee content
+  const marqueeItems = [
+    'IN THE MOOD FOR LOVE — COLOR AS LONGING',
+    'THE GODFATHER — BLOCKING & POWER',
+    'PARIS, TEXAS — THE LANDSCAPE AS CHARACTER',
+    'CHUNGKING EXPRESS — MOTION BLUR & LONELINESS',
+    'THERE WILL BE BLOOD — THE OPENING 15 MINUTES'
+  ];
+  document.getElementById('marqueeTrack').innerHTML =
+    marqueeItems.concat(marqueeItems).map(t => `<span>${t}</span>`).join('');
+
+  // work grid — placeholder posts (swap gradients for real stills, replace copy)
+  const works = [
+    {tag:'CAROUSEL · 8 SLIDES', title:'Color as Longing', meta:'In the Mood for Love, 2000', grad:'linear-gradient(160deg,#4a1620,#0E0D10)'},
+    {tag:'CAROUSEL · 6 SLIDES', title:'Blocking & Power', meta:'The Godfather, 1972', grad:'linear-gradient(160deg,#2a2210,#0E0D10)'},
+    {tag:'CAROUSEL · 10 SLIDES', title:'Landscape as Character', meta:'Paris, Texas, 1984', grad:'linear-gradient(160deg,#1a2a3a,#0E0D10)'},
+    {tag:'CAROUSEL · 7 SLIDES', title:'Motion & Loneliness', meta:'Chungking Express, 1994', grad:'linear-gradient(160deg,#2a1a3a,#0E0D10)'},
+    {tag:'CAROUSEL · 9 SLIDES', title:'The First 15 Minutes', meta:'There Will Be Blood, 2007', grad:'linear-gradient(160deg,#3a1a10,#0E0D10)'},
+    {tag:'CAROUSEL · 5 SLIDES', title:'Framing Isolation', meta:'Taxi Driver, 1976', grad:'linear-gradient(160deg,#1a1a1a,#0E0D10)'}
+  ];
+  document.getElementById('workGrid').innerHTML = works.map(w => `
+    <div class="card" style="background:${w.grad}">
+      <div class="card-content">
+        <span class="tag">${w.tag}</span>
+        <h3>${w.title}</h3>
+        <p>${w.meta}</p>
+      </div>
+    </div>
+  `).join('');
+
+  // blog posts — placeholder, edit freely
+  const posts = [
+    {date:'Jul 2026', title:'Why the color red disappears in the third act', excerpt:'A look at how a single desaturated palette choice reframes the ending — and why most viewers never consciously notice it.'},
+    {date:'Jun 2026', title:'Static frames vs. moving frames: what carousels lose', excerpt:'Breaking a film down into six still images means picking six moments to represent a whole scene of motion. Here is how I choose them.'},
+    {date:'May 2026', title:'The 15-minute rule for cold opens', excerpt:'Some of the best films spend their first act in near silence. Notes on pacing, patience, and audience trust.'},
+    {date:'Apr 2026', title:'On rewatching a film just for its blocking', excerpt:'Turning off the sound and watching where people stand in a frame tells you almost everything about power in a scene.'}
+  ];
+  const postsList = document.getElementById('postsList');
+  postsList.innerHTML = posts.map((p,i) => `
+    <div class="post-row" data-i="${i}">
+      <div class="date">${p.date}</div>
+      <div>
+        <h3>${p.title}</h3>
+        <div class="excerpt">${p.excerpt}</div>
+      </div>
+      <div class="arrow">Read →</div>
+    </div>
+  `).join('');
+  postsList.querySelectorAll('.post-row').forEach(row=>{
+    row.addEventListener('click', ()=> row.classList.toggle('open'));
+  });
+
+  document.getElementById('perfStrip').innerHTML = '<div></div>'.repeat(40);
+</script>
+
+
+
+</body></html>
